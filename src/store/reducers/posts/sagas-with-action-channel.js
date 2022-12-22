@@ -1,6 +1,6 @@
 import {takeEvery, call, put, all, actionChannel, take} from 'redux-saga/effects'
+import {getUserPosts} from "../../../api/posts";
 import {USER_POSTS_FETCH_FAILED, USER_POSTS_FETCH_REQUESTED, USER_POSTS_FETCH_SUCCEEDED} from "./actions";
-import {getUserPosts} from "../api/posts";
 
 function* fetchUserPosts(action) {
     try {

@@ -4,7 +4,7 @@ const initialState = {
     posts: null
 }
 
-export const reducer = (state = initialState, action) => {
+export const postReducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_POSTS_FETCH_SUCCEEDED: {
             const posts = action.payload.data
