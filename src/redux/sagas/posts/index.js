@@ -1,6 +1,6 @@
 import {takeEvery, take, call, put} from 'redux-saga/effects'
 import {USER_POSTS_FAILED, USER_POSTS_FETCH, USER_POSTS_SUCCESS} from "../../reducers/posts/actions";
-import {getUserPosts} from "../../../api/posts";
+import {getUserPosts} from "../../../api/post";
 
 function* fetchUserPostsWorker(action) {
    try {

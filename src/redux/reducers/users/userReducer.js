@@ -1,4 +1,4 @@
-import {LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT} from "./actions";
+import {LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, STOP_IS_LOADING} from "./actions";
 
 const initialState = {
     error: null,
@@ -34,9 +34,14 @@ export const userReducer = (state= initialState, action) => {
         case LOGOUT: {
             return {
                 ...state,
-                isLoadingLogin: false,
                 error: null,
                 token: null
+            }
+        }
+        case STOP_IS_LOADING: {
+            return {
+                ...state,
+                isLoadingLogin: false
             }
         }
         default:
