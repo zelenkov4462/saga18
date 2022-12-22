@@ -1,52 +1,46 @@
 import './App.css';
 import {useDispatch, useSelector} from "react-redux";
-import {LOGIN_REQUEST, LOGOUT} from "./store/reducers/users/actions";
-import {selectError, selectIsLogPending, selectToken} from "./store/reducers/users/selectors";
-import {USER_POSTS_FETCH_REQUESTED} from "./store/reducers/posts/actions";
+import {USER_POSTS_FETCH} from "./redux/reducers/posts/actions";
+import {LOGIN_REQUEST, LOGOUT} from "./redux/reducers/users/actions";
+import {selectError, selectIsLoading, selectToken} from "./redux/reducers/users/selectors";
 
 function App() {
-  const dispatch = useDispatch()
-  const error = useSelector(selectError)
-  const token = useSelector(selectToken)
-  const isLoginPending = useSelector(selectIsLogPending)
+    const dispatch = useDispatch()
 
-  const fetchHandler = () => {
-    dispatch({
-      type: USER_POSTS_FETCH_REQUESTED,
-      payload: {
-        userId: 1
-      }
-    })
-  }
+    const token = useSelector(selectToken)
+    const error = useSelector(selectError)
+    const isLoadingLogin = useSelector(selectIsLoading)
 
-  const handleLoginClick = () => {
-    dispatch({
-      type: LOGIN_REQUEST,
-      payload: {
-        username: 'user1',
-        password: 'user1password'
-      }
-    })
-  }
+    const
+    fetchHandler = () => {
+        dispatch({
+            type: USER_POSTS_FETCH, payload: {
+                userId: 1
+            }
+        })
+    }
 
-  const handleLogoutClick = () => {
-    dispatch({
-      type: LOGOUT
-    })
-  }
-  return (
-    <div className="App">
-      <button onClick={fetchHandler}>Get fetch posts</button>
-      <div>
-        <button onClick={handleLoginClick}>Log in</button>
-        <button onClick={handleLogoutClick}>Log out</button>
-        {isLoginPending && <p>Loging in</p>}
-        {error && <p>Error: {error}</p>}
-        {token && <p>token: {token}</p>}
+    const loginHandler = () => {
+        dispatch({
+            type: LOGIN_REQUEST, payload: {
+                username: 'user1', password: 'user1password'
+            }
+        })
+    }
 
-      </div>
-    </div>
-  );
+    const logoutHandler = () => {
+        dispatch({type: LOGOUT})
+    }
+    return (
+        <div>
+            <button onClick={fetchHandler}>Get posts</button>
+            <button onClick={loginHandler}>login</button>
+            <button onClick={logoutHandler}>logout</button>
+            {isLoadingLogin && <div>Loading...</div>}
+            {error && <div>error: {error}</div>}
+            {token && <div>{token}</div>}
+        </div>
+    );
 }
 
 export default App;
