@@ -23,10 +23,12 @@ function* loginWorker(action) {
 }
 
 export function* userLoginWatcher() {
-    yield takeEvery(LOGIN_REQUEST, loginWorker )
-    // const {payload} = yield take(LOGIN_REQUEST)
-    // yield call(loginWorker, payload.username, payload.password)
-    yield take(LOGOUT)
-    yield call(clearToken)
+    while (true) {
+        yield takeEvery(LOGIN_REQUEST, loginWorker )
+        // const {payload} = yield take(LOGIN_REQUEST)
+        // yield call(loginWorker, payload.username, payload.password)
+        yield take(LOGOUT)
+        yield call(clearToken)
+    }
 
 }
