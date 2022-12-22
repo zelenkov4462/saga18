@@ -7,13 +7,13 @@ import {applyMiddleware, compose, createStore} from "redux";
 import {rootReducer} from "./store/reducers";
 import {composeWithDevTools} from "redux-devtools-extension";
 import createSagaMiddleware from 'redux-saga'
-import {rootSaga} from "./store/sagas";
+import {userPostsFetchRequestedWatcherSaga} from "./store/sagas-with-action-channel";
 
 const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
 
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(userPostsFetchRequestedWatcherSaga)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
